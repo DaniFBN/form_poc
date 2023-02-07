@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:form_poc/test_page_model.dart';
 
 import 'fields/text/money/palm_money_style.dart';
+import 'test_package.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
       ),
-      home: TestPageModel(),
+      home: TestPackage(),
     );
   }
 }

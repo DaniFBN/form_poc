@@ -1,7 +1,8 @@
+import 'dart:math';
+
+import 'package:dynamic_form/dynamic_form.dart';
 import 'package:flutter/material.dart';
 import 'package:form_poc/fields/text/password/password_model.dart';
-
-import '../../../interfaces/form_field_widget.dart';
 
 class PalmPasswordField extends StatefulWidget implements IFormFieldWidget {
   @override
@@ -14,7 +15,24 @@ class PalmPasswordField extends StatefulWidget implements IFormFieldWidget {
 }
 
 class _PalmPasswordFieldState extends State<PalmPasswordField> {
+  late final TextEditingController controller;
   bool showPassword = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = TextEditingController();
+  }
+
+  @override
+  void didUpdateWidget(covariant PalmPasswordField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.model != widget.model) {
+      controller.value = TextEditingValue(text: widget.model.value);
+    }
+  }
 
   void toggleShowPassword() {
     setState(() {
@@ -24,32 +42,35 @@ class _PalmPasswordFieldState extends State<PalmPasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return FormField(
-      validator: widget.model.validator,
-      builder: (FormFieldState<dynamic> field) {
-        if (!field.isValid && field.errorText != null) {
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Error PalmPasswordField ${field.errorText}'),
-              ),
-            );
-          });
-        }
-
-        return TextField(
-          obscureText: showPassword,
-          decoration: InputDecoration(
-            label: const Text('PalmPasswordField'),
-            suffixIcon: IconButton(
-              onPressed: toggleShowPassword,
-              icon: Icon(
-                showPassword ? Icons.visibility_off : Icons.visibility,
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: controller,
+            obscureText: showPassword,
+            decoration: InputDecoration(
+              label: const Text('PalmPasswordField'),
+              suffixIcon: IconButton(
+                onPressed: toggleShowPassword,
+                icon: Icon(
+                  showPassword ? Icons.visibility_off : Icons.visibility,
+                ),
               ),
             ),
           ),
-        );
-      },
+        ),
+        if (widget.model.hasTrigger)
+          ElevatedButton(
+            onPressed: () {
+              final randomInt = Random().nextInt(5000);
+              final newModel = widget.model.copyWith(
+                value: 'PalmPasswordModel - $randomInt',
+              );
+              DynamicFormWidget.of(context).trigger(formFieldModel: newModel);
+            },
+            child: const Text('TRIGGER'),
+          ),
+      ],
     );
   }
 }

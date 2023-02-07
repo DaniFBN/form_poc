@@ -1,89 +1,55 @@
 import 'dart:math';
 
-import '../../../interfaces/form_field_model.dart';
+import 'package:dynamic_form/dynamic_form.dart';
+
 import '../text/money/palm_money_model.dart';
 import '../text/password/password_model.dart';
 
 class PalmTableModel implements IFormFieldModel {
   @override
   final String id;
-  @override
-  final String initialValue;
 
   @override
-  final bool isEditable;
+  String get key => '$runtimeType-$id';
 
   @override
-  final String name;
-
-  @override
-  final String value;
+  final bool hasTrigger;
 
   final Set<IFormFieldModel> fields;
 
-  @override
-  final String? Function(String?) validator;
-
-  @override
-  String get key => '$runtimeType-$id-$name';
-
   PalmTableModel({
     required this.id,
-    required this.initialValue,
-    required this.isEditable,
-    required this.name,
-    required this.value,
     required this.fields,
-    required this.validator,
+    required this.hasTrigger,
   });
 
   factory PalmTableModel.fromMap(Map<String, dynamic> map) {
     return PalmTableModel(
-      initialValue: '',
-      isEditable: false,
-      name: '',
-      value: '',
-      validator: (_) => null,
+      hasTrigger: false,
       id: Random().nextInt(5000).toString(),
       fields: {
         PalmMoneyModel(
-          initialValue: '',
-          isEditable: false,
-          name: '',
           value: '',
-          validator: (_) => 'xD',
+          hasTrigger: false,
           id: Random().nextInt(5000).toString(),
         ),
         PalmPasswordModel(
-          initialValue: '',
-          isEditable: false,
-          name: '',
           value: '',
-          validator: (_) => 'TESTE',
+          hasTrigger: true,
           id: Random().nextInt(5000).toString(),
         ),
         PalmTableModel(
-          initialValue: '',
-          isEditable: false,
-          name: '',
-          value: '',
-          validator: (_) => null,
+          hasTrigger: false,
           id: Random().nextInt(5000).toString(),
           fields: {
             PalmMoneyModel(
-              initialValue: '',
-              isEditable: false,
-              name: '',
+              hasTrigger: true,
               value: '',
-              validator: (_) => 'xD',
               id: Random().nextInt(5000).toString(),
             ),
             PalmPasswordModel(
-              initialValue: '',
-              isEditable: false,
-              name: '',
+              hasTrigger: true,
               value: '',
-              validator: (_) => 'TESTE',
               id: Random().nextInt(5000).toString(),
             )
           },
@@ -95,12 +61,8 @@ class PalmTableModel implements IFormFieldModel {
   @override
   PalmTableModel copyWith({String? value, Set<IFormFieldModel>? fields}) {
     return PalmTableModel(
-      initialValue: initialValue,
-      isEditable: isEditable,
-      name: name,
       fields: fields ?? this.fields,
-      value: value ?? this.value,
-      validator: validator,
+      hasTrigger: hasTrigger,
       id: id,
     );
   }

@@ -5,17 +5,24 @@ import 'dynamic_field_model.dart';
 class DynamicFieldsWidget extends InheritedWidget {
   const DynamicFieldsWidget({
     super.key,
-    required this.child,
+    required super.child,
     required this.fields,
-  }) : super(child: child);
+  });
 
-  @override
-  final Widget child;
+  final Set<DynamicFieldModel> fields;
 
-  final List<DynamicFieldModel> fields;
+  DynamicFieldModel get(String fieldName) {
+    final filteredFields = fields.where((e) => e.name == fieldName);
 
-  static DynamicFieldsWidget? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<DynamicFieldsWidget>();
+    if (filteredFields.isEmpty) throw '';
+
+    final field = filteredFields.first;
+
+    return field;
+  }
+
+  static DynamicFieldsWidget of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<DynamicFieldsWidget>()!;
   }
 
   @override

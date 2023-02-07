@@ -1,29 +1,41 @@
+import 'package:dynamic_form/dynamic_form.dart';
 import 'package:flutter/material.dart';
 import 'package:form_poc/fields/table/table_model.dart';
 
-import '../../interfaces/form_field_widget.dart';
-import '../../resolver.dart';
-
-class TableWidget extends StatelessWidget implements IFormFieldWidget {
+class PalmTableField extends StatefulWidget implements IFormFieldWidget {
   @override
   final PalmTableModel model;
 
-  const TableWidget({
+  const PalmTableField({
     Key? key,
     required this.model,
   }) : super(key: key);
 
   @override
+  State<PalmTableField> createState() => _PalmTableFieldState();
+}
+
+class _PalmTableFieldState extends State<PalmTableField> {
+  @override
   Widget build(BuildContext context) {
-    final widgetFields = model.fields.map(
-      (e) =>
-          Resolver.getFieldByModel(e.runtimeType.toString()).builder(model: e),
-    );
+    final dynamicFields = DynamicFieldsWidget.of(context);
+    final widgetFields = widget.model.fields.map(
+      (fieldModel) {
+        final fieldType = fieldModel.runtimeType.toString();
+        final dynamicModel = dynamicFields.get(fieldType);
+        return dynamicModel.widgetBuilderByModel(fieldModel);
+      },
+    ).toList();
+
     return Card(
+      elevation: 3,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
-          children: widgetFields.toList(),
+          children: [
+            const Text('PalmTableField'),
+            ...widgetFields,
+          ],
         ),
       ),
     );

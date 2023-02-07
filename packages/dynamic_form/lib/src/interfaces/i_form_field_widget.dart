@@ -1,9 +1,40 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dynamic_form/dynamic_form.dart';
 import 'package:flutter/material.dart';
 
-import 'i_form_field_model.dart';
+abstract class IFormFieldWidget extends StatefulWidget {
+  const IFormFieldWidget({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
 
-abstract class IFormFieldWidget<String> extends Widget {
   final IFormFieldModel model;
 
-  const IFormFieldWidget({required this.model, super.key});
+  @override
+  State<IFormFieldWidget> createState() => _IFormFieldWidgetState();
+}
+
+class _IFormFieldWidgetState extends State<IFormFieldWidget> {
+  // String value;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   value = '';
+  // }
+
+  // @override
+  // void didUpdateWidget(covariant IFormFieldWidget oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+
+  //   if (oldWidget.model != widget.model) {
+  //     value = widget.model.value;
+  //   }
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
