@@ -43,12 +43,6 @@ class PalmMoneyModel implements IFormFieldModel {
   }
 
   @override
-  IFormFieldModel? findModelByKey(String keyValue) {
-    if (key == keyValue) return this;
-    return null;
-  }
-
-  @override
   IFormFieldModel replaceModel(IFormFieldModel model) {
     if (model is! PalmMoneyModel) return this;
     if (model.key != key) return this;

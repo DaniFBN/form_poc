@@ -72,17 +72,6 @@ class PalmTableModel implements IFormFieldModel {
     throw UnimplementedError();
   }
 
-  @override
-  IFormFieldModel? findModelByKey(String keyValue) {
-    final filteredFields = fields.where((element) {
-      return element.findModelByKey(keyValue) != null;
-    });
-
-    if (filteredFields.isEmpty) return null;
-
-    final field = filteredFields.first;
-    return field;
-  }
 
   @override
   IFormFieldModel replaceModel(IFormFieldModel model) {

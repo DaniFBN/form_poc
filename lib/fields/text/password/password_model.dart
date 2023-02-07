@@ -43,12 +43,6 @@ class PalmPasswordModel implements IFormFieldModel {
   }
 
   @override
-  IFormFieldModel? findModelByKey(String keyValue) {
-    if (key == keyValue) return this;
-    return null;
-  }
-
-  @override
   IFormFieldModel replaceModel(IFormFieldModel model) {
     if (model is! PalmPasswordModel) return this;
 

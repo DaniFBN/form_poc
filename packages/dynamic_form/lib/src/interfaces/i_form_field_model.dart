@@ -3,7 +3,7 @@ abstract class IFormFieldModel<T> {
   String get key;
   bool get hasTrigger;
 
-  IFormFieldModel? findModelByKey(String keyValue);
+  Map<String, dynamic> toMap();
   IFormFieldModel replaceModel(IFormFieldModel model);
   IFormFieldModel copyWith({String? value});
 }
