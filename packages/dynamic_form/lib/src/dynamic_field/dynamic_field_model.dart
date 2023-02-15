@@ -1,8 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:dynamic_form/src/interfaces/i_form_field_model.dart';
-import 'package:dynamic_form/src/interfaces/i_form_field_widget.dart';
+import 'package:dynamic_form/src/form_field/i_form_field_model.dart';
+import 'package:dynamic_form/src/form_field/form_field_widget.dart';
 
-typedef FormWidgetBuilder = IFormFieldWidget Function(IFormFieldModel model);
+typedef FormWidgetBuilder = FormFieldWidget Function(IFormFieldModel model);
 typedef ModelFromMapBuilder = IFormFieldModel Function(
   Map<String, dynamic> map,
 );

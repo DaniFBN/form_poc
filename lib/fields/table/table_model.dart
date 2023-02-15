@@ -1,11 +1,14 @@
 import 'dart:math';
 
 import 'package:dynamic_form/dynamic_form.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:form_poc/fields/table/table_widget.dart';
 
-import '../text/money/palm_money_model.dart';
+import '../text/money/money_model.dart';
 import '../text/password/password_model.dart';
 
-class PalmTableModel implements IFormFieldModel {
+class TableModel implements IFormFieldModel {
   @override
   final String id;
 
@@ -17,40 +20,113 @@ class PalmTableModel implements IFormFieldModel {
 
   final Set<IFormFieldModel> fields;
 
-  PalmTableModel({
+  TableModel({
     required this.id,
     required this.fields,
     required this.hasTrigger,
   });
 
-  factory PalmTableModel.fromMap(Map<String, dynamic> map) {
-    return PalmTableModel(
+  factory TableModel.fromMap(Map<String, dynamic> map) {
+    return TableModel(
       hasTrigger: false,
       id: Random().nextInt(5000).toString(),
       fields: {
-        PalmMoneyModel(
+        MoneyModel(
           value: '',
           hasTrigger: false,
           id: Random().nextInt(5000).toString(),
         ),
-        PalmPasswordModel(
+        PasswordModel(
           value: '',
           hasTrigger: true,
           id: Random().nextInt(5000).toString(),
         ),
-        PalmTableModel(
+        PasswordModel(
+          value: '',
+          hasTrigger: true,
+          id: Random().nextInt(5000).toString(),
+        ),
+        PasswordModel(
+          value: '',
+          hasTrigger: true,
+          id: Random().nextInt(5000).toString(),
+        ),
+        PasswordModel(
+          value: '',
+          hasTrigger: true,
+          id: Random().nextInt(5000).toString(),
+        ),
+        PasswordModel(
+          value: '',
+          hasTrigger: true,
+          id: Random().nextInt(5000).toString(),
+        ),
+        PasswordModel(
+          value: '',
+          hasTrigger: true,
+          id: Random().nextInt(5000).toString(),
+        ),
+        TableModel(
           hasTrigger: false,
           id: Random().nextInt(5000).toString(),
           fields: {
-            PalmMoneyModel(
+            MoneyModel(
               hasTrigger: true,
               value: '',
               id: Random().nextInt(5000).toString(),
             ),
-            PalmPasswordModel(
+            PasswordModel(
               hasTrigger: true,
               value: '',
               id: Random().nextInt(5000).toString(),
+            ),
+            TableModel(
+              hasTrigger: false,
+              id: Random().nextInt(5000).toString(),
+              fields: {
+                MoneyModel(
+                  hasTrigger: true,
+                  value: '',
+                  id: Random().nextInt(5000).toString(),
+                ),
+                PasswordModel(
+                  hasTrigger: true,
+                  value: '',
+                  id: Random().nextInt(5000).toString(),
+                ),
+                TableModel(
+                  hasTrigger: false,
+                  id: Random().nextInt(5000).toString(),
+                  fields: {
+                    MoneyModel(
+                      hasTrigger: true,
+                      value: '',
+                      id: Random().nextInt(5000).toString(),
+                    ),
+                    PasswordModel(
+                      hasTrigger: true,
+                      value: '',
+                      id: Random().nextInt(5000).toString(),
+                    ),
+                    TableModel(
+                      hasTrigger: false,
+                      id: Random().nextInt(5000).toString(),
+                      fields: {
+                        MoneyModel(
+                          hasTrigger: true,
+                          value: '',
+                          id: Random().nextInt(5000).toString(),
+                        ),
+                        PasswordModel(
+                          hasTrigger: true,
+                          value: '',
+                          id: Random().nextInt(5000).toString(),
+                        )
+                      },
+                    )
+                  },
+                )
+              },
             )
           },
         )
@@ -59,8 +135,8 @@ class PalmTableModel implements IFormFieldModel {
   }
 
   @override
-  PalmTableModel copyWith({String? value, Set<IFormFieldModel>? fields}) {
-    return PalmTableModel(
+  TableModel copyWith({String? value, Set<IFormFieldModel>? fields}) {
+    return TableModel(
       fields: fields ?? this.fields,
       hasTrigger: hasTrigger,
       id: id,
@@ -72,13 +148,25 @@ class PalmTableModel implements IFormFieldModel {
     throw UnimplementedError();
   }
 
-
   @override
   IFormFieldModel replaceModel(IFormFieldModel model) {
     final newFields = fields.map((e) => e.replaceModel(model)).toSet();
 
     return copyWith(fields: newFields);
   }
+
+  @override
+  bool operator ==(covariant TableModel other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id && setEquals(other.fields, fields);
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ fields.hashCode;
+
+  @override
+  TableStyle get theme => TableStyle(Colors.amber.shade200, 5);
 }
 
 

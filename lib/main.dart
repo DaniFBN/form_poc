@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:form_poc/fields/table/table_widget.dart';
 
-import 'fields/text/money/palm_money_style.dart';
 import 'test_package.dart';
 
 void main() {
@@ -16,13 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        extensions: [
-          PalmMoneyStyle(
-            errorColor: Colors.red.shade300,
-          ),
-        ],
       ),
-      home: TestPackage(),
+      home: const TestPackage(),
     );
   }
 }

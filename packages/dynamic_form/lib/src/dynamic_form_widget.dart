@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'interfaces/i_form_field_model.dart';
+import 'form_field/i_form_field_model.dart';
 
 class DynamicFormWidget
-    extends InheritedNotifier<ValueNotifier<List<IFormFieldModel>>> {
+    extends InheritedNotifier<ValueNotifier<Iterable<IFormFieldModel>>> {
   DynamicFormWidget({
     super.key,
     required super.child,
-    required List<IFormFieldModel> fields,
-  }) : super(notifier: ValueNotifier<List<IFormFieldModel>>(fields));
+    required Iterable<IFormFieldModel> fields,
+  }) : super(notifier: ValueNotifier<Iterable<IFormFieldModel>>(fields));
 
-  List<IFormFieldModel> get fields => notifier!.value;
+  Iterable<IFormFieldModel> get fields => notifier!.value;
 
   void trigger({required IFormFieldModel formFieldModel}) {
-    final oldFields = notifier!.value;
-
-    final newFields = oldFields.map((e) {
+    final newFields = notifier!.value.map((e) {
       return e.replaceModel(formFieldModel);
-    }).toList();
+    });
+
     notifier!.value = newFields;
   }
 

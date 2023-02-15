@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:dynamic_form/dynamic_form.dart';
+import 'package:flutter/src/material/theme_data.dart';
 
-class PalmMoneyModel implements IFormFieldModel {
+class MoneyModel implements IFormFieldModel {
   @override
   final String id;
 
@@ -14,14 +15,14 @@ class PalmMoneyModel implements IFormFieldModel {
 
   final String value;
 
-  PalmMoneyModel({
+  MoneyModel({
     required this.id,
     required this.value,
     required this.hasTrigger,
   });
 
-  factory PalmMoneyModel.fromMap(Map<String, dynamic> map) {
-    return PalmMoneyModel(
+  factory MoneyModel.fromMap(Map<String, dynamic> map) {
+    return MoneyModel(
       value: '',
       hasTrigger: true,
       id: Random().nextInt(5000).toString(),
@@ -29,8 +30,8 @@ class PalmMoneyModel implements IFormFieldModel {
   }
 
   @override
-  PalmMoneyModel copyWith({String? value}) {
-    return PalmMoneyModel(
+  MoneyModel copyWith({String? value}) {
+    return MoneyModel(
       value: value ?? this.value,
       hasTrigger: hasTrigger,
       id: id,
@@ -44,7 +45,7 @@ class PalmMoneyModel implements IFormFieldModel {
 
   @override
   IFormFieldModel replaceModel(IFormFieldModel model) {
-    if (model is! PalmMoneyModel) return this;
+    if (model is! MoneyModel) return this;
     if (model.key != key) return this;
     if (model.value == value) return this;
     return model;
@@ -52,4 +53,8 @@ class PalmMoneyModel implements IFormFieldModel {
 
   @override
   String toString() => 'Money - $hashCode';
+
+  @override
+  // TODO: implement theme
+  ThemeExtension<ThemeExtension> get theme => throw UnimplementedError();
 }

@@ -2,36 +2,31 @@ import 'dart:math';
 
 import 'package:dynamic_form/dynamic_form.dart';
 import 'package:flutter/material.dart';
-import 'package:form_poc/fields/text/password/password_model.dart';
 
-class PalmPasswordField extends StatefulWidget implements IFormFieldWidget {
+import 'password_controller.dart';
+import 'password_model.dart';
+
+class PasswordField extends StatefulWidget implements FormFieldWidget {
   @override
-  final PalmPasswordModel model;
+  final PasswordModel model;
 
-  const PalmPasswordField({super.key, required this.model});
+  const PasswordField({super.key, required this.model});
 
   @override
-  State<PalmPasswordField> createState() => _PalmPasswordFieldState();
+  State<PasswordField> createState() => _PasswordFieldState();
 }
 
-class _PalmPasswordFieldState extends State<PalmPasswordField> {
-  late final TextEditingController controller;
+class _PasswordFieldState extends FormFieldWidgetState<PasswordField> {
+  @override
+  late final PasswordController controller;
+
   bool showPassword = false;
 
   @override
   void initState() {
     super.initState();
 
-    controller = TextEditingController();
-  }
-
-  @override
-  void didUpdateWidget(covariant PalmPasswordField oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.model != widget.model) {
-      controller.value = TextEditingValue(text: widget.model.value);
-    }
+    controller = PasswordController(widget.model);
   }
 
   void toggleShowPassword() {
@@ -46,10 +41,10 @@ class _PalmPasswordFieldState extends State<PalmPasswordField> {
       children: [
         Expanded(
           child: TextField(
-            controller: controller,
+            controller: controller.controller,
             obscureText: showPassword,
             decoration: InputDecoration(
-              label: const Text('PalmPasswordField'),
+              label: const Text('PasswordField'),
               suffixIcon: IconButton(
                 onPressed: toggleShowPassword,
                 icon: Icon(
@@ -64,7 +59,7 @@ class _PalmPasswordFieldState extends State<PalmPasswordField> {
             onPressed: () {
               final randomInt = Random().nextInt(5000);
               final newModel = widget.model.copyWith(
-                value: 'PalmPasswordModel - $randomInt',
+                value: 'PasswordModel - $randomInt',
               );
               DynamicFormWidget.of(context).trigger(formFieldModel: newModel);
             },

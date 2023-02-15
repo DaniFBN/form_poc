@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:dynamic_form/dynamic_form.dart';
+import 'package:flutter/src/material/theme_data.dart';
 
-class PalmPasswordModel implements IFormFieldModel {
+class PasswordModel implements IFormFieldModel {
   @override
   final String id;
 
@@ -14,14 +15,14 @@ class PalmPasswordModel implements IFormFieldModel {
 
   final String value;
 
-  PalmPasswordModel({
+  PasswordModel({
     required this.id,
     required this.value,
     required this.hasTrigger,
   });
 
-  factory PalmPasswordModel.fromMap(Map<String, dynamic> map) {
-    return PalmPasswordModel(
+  factory PasswordModel.fromMap(Map<String, dynamic> map) {
+    return PasswordModel(
       value: '',
       hasTrigger: true,
       id: Random().nextInt(5000).toString(),
@@ -29,8 +30,8 @@ class PalmPasswordModel implements IFormFieldModel {
   }
 
   @override
-  PalmPasswordModel copyWith({String? value}) {
-    return PalmPasswordModel(
+  PasswordModel copyWith({String? value}) {
+    return PasswordModel(
       value: value ?? this.value,
       hasTrigger: hasTrigger,
       id: id,
@@ -44,10 +45,14 @@ class PalmPasswordModel implements IFormFieldModel {
 
   @override
   IFormFieldModel replaceModel(IFormFieldModel model) {
-    if (model is! PalmPasswordModel) return this;
+    if (model is! PasswordModel) return this;
 
     if (model.key != key) return this;
     if (model.value == value) return this;
     return model;
   }
+
+  @override
+  // TODO: implement theme
+  ThemeExtension<ThemeExtension> get theme => throw UnimplementedError();
 }
