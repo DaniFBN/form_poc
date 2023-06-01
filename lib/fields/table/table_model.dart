@@ -18,6 +18,11 @@ class TableModel implements IFormFieldModel {
   @override
   final bool hasTrigger;
 
+
+  @override
+  // TODO(danifbn): Isso ta errado, teria que mexer na herança, porque isso não deveria ser um FormField
+  String get value => throw UnimplementedError();
+
   final Set<IFormFieldModel> fields;
 
   TableModel({
@@ -167,6 +172,7 @@ class TableModel implements IFormFieldModel {
 
   @override
   TableStyle get theme => TableStyle(Colors.amber.shade200, 5);
+  
 }
 
 

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:dynamic_form/dynamic_form.dart';
-import 'package:flutter/src/material/theme_data.dart';
+import 'package:flutter/material.dart';
 
 class PasswordModel implements IFormFieldModel {
   @override
@@ -13,6 +13,7 @@ class PasswordModel implements IFormFieldModel {
   @override
   String get key => '$runtimeType-$id';
 
+  @override
   final String value;
 
   PasswordModel({
@@ -53,6 +54,5 @@ class PasswordModel implements IFormFieldModel {
   }
 
   @override
-  // TODO: implement theme
   ThemeExtension<ThemeExtension> get theme => throw UnimplementedError();
 }

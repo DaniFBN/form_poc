@@ -1,5 +1,7 @@
 import 'package:dynamic_form/dynamic_form.dart';
 import 'package:flutter/material.dart';
+import 'package:form_poc/fields/radio/radio_model.dart';
+import 'package:form_poc/fields/radio/radio_widget.dart';
 import 'package:form_poc/fields/text/password/password_field.dart';
 import 'package:form_poc/fields/text/password/password_model.dart';
 
@@ -76,6 +78,7 @@ class _TestPackageState extends State<TestPackage> {
 }
 
 const mock = [
+  {'type': 'RadioModel'},
   {'type': 'PasswordModel'},
   {'type': 'MoneyModel'},
   {'type': 'TableModel'},
@@ -104,6 +107,16 @@ final mockFields = {
     modelFromMapBuilder: TableModel.fromMap,
     widgetBuilderByModel: (IFormFieldModel model) {
       return TableField(model: model as TableModel);
+    },
+  ),
+  DynamicFieldModel(
+    name: 'RadioModel',
+    modelFromMapBuilder: RadioModel.fromMap,
+    widgetBuilderByModel: (IFormFieldModel model) {
+      return RadioFieldWidget(
+        key: ValueKey(model.key),
+        model: model as RadioModel,
+      );
     },
   ),
 };

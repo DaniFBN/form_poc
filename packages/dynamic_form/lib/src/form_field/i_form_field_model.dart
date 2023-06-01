@@ -7,6 +7,8 @@ abstract class IFormFieldModel implements IFieldModel {
   @override
   String get key;
 
+  String get value;
+
   bool get hasTrigger;
 
   Map<String, dynamic> toMap();

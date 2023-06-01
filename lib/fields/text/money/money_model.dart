@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:dynamic_form/dynamic_form.dart';
-import 'package:flutter/src/material/theme_data.dart';
+import 'package:flutter/material.dart';
 
 class MoneyModel implements IFormFieldModel {
   @override
@@ -13,6 +13,7 @@ class MoneyModel implements IFormFieldModel {
   @override
   final bool hasTrigger;
 
+  @override
   final String value;
 
   MoneyModel({
@@ -55,6 +56,5 @@ class MoneyModel implements IFormFieldModel {
   String toString() => 'Money - $hashCode';
 
   @override
-  // TODO: implement theme
   ThemeExtension<ThemeExtension> get theme => throw UnimplementedError();
 }
